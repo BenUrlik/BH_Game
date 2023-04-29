@@ -14,7 +14,7 @@ public class BulletHellSpawning : MonoBehaviour
     public float angle;
     public Material material;
     public float spin_speed;
-    private float time;
+    public float time;
     private float lastEmit;
     public Light lightPrefab;
 
@@ -24,11 +24,11 @@ public class BulletHellSpawning : MonoBehaviour
         Summon();
     }
 
+    private void Update() {
+        // this.transform.Translate(0, Mathf.Sin(Time.deltaTime), 0);
+    }
+
     private void FixedUpdate() {
-        // Rotation Movement
-        time += Time.fixedDeltaTime;
-        transform.rotation = Quaternion.Euler(0, 0, time * spin_speed);
-        
         lastEmit += Time.fixedDeltaTime;
         if(lastEmit >= firerate) {
             DoEmit();
@@ -37,7 +37,7 @@ public class BulletHellSpawning : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Summon()
+    private void Summon()
     {
         // Spread of each particle emitter
         // angle = angle / number_of_columns;
@@ -77,9 +77,12 @@ public class BulletHellSpawning : MonoBehaviour
 
             var collisions = system.collision;
             collisions.enabled = true;
-            collisions.sendCollisionMessages = true;
+            collisions.type = ParticleSystemCollisionType.World;
+            collisions.mode = ParticleSystemCollisionMode.Collision2D; 
             collisions.bounce = 0;
-
+            collisions.lifetimeLoss = 1;
+            collisions.sendCollisionMessages = true;
+            
             // var text = system.textureSheetAnimation;
             // text.enabled = false;
             // text.mode = ParticleSystemAnimationMode.Sprites;
@@ -87,7 +90,7 @@ public class BulletHellSpawning : MonoBehaviour
         }
     }
 
-    void DoEmit() {
+    public void DoEmit() {
         foreach(Transform child in transform){
             system = child.GetComponent<ParticleSystem>();
 

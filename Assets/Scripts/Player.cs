@@ -14,8 +14,9 @@ public class Player : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log("Player has been hit!");
-        Debug.Log(playerHealth--);
+        // Debug.Log("Player has been hit!");
+        // Debug.Log(playerHealth--);
+        playerHealth--;
         if(playerHealth == 0) { 
             Destroy(player.GetComponent<SpriteRenderer>()); 
             Destroy(player.GetComponent<CircleCollider2D>());
