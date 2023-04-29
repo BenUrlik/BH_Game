@@ -59,7 +59,7 @@ public class BulletHellSpawning : MonoBehaviour
             mainModule.startColor = color;
             mainModule.startSize = size;
             mainModule.startSpeed = speed;
-            mainModule.maxParticles = 10000;
+            mainModule.maxParticles = 1000;
             mainModule.simulationSpace = ParticleSystemSimulationSpace.World;
 
 
@@ -71,14 +71,14 @@ public class BulletHellSpawning : MonoBehaviour
             forma.shapeType = ParticleSystemShapeType.Sprite;
             forma.sprite = null;
 
-            // var _light = system.lights;
-            // _light.enabled = true;
-            // Debug.Log(light.ratio);
+            var _light = system.lights;
+            _light.light = lightPrefab;
+            _light.enabled = true;
 
-            var text = system.textureSheetAnimation;
-            text.enabled = false;
-            text.mode = ParticleSystemAnimationMode.Sprites;
-            text.AddSprite(texture);
+            // var text = system.textureSheetAnimation;
+            // text.enabled = false;
+            // text.mode = ParticleSystemAnimationMode.Sprites;
+            // text.AddSprite(texture);
         }
     }
 
@@ -90,7 +90,7 @@ public class BulletHellSpawning : MonoBehaviour
             emitParams.startColor = color;
             emitParams.startSize = size;
             emitParams.startLifetime = lifetime;
-            system.Emit(emitParams, 10);
+            system.Emit(emitParams, 1);
 
             system.Play();
         }
