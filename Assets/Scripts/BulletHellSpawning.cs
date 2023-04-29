@@ -75,6 +75,11 @@ public class BulletHellSpawning : MonoBehaviour
             _light.light = lightPrefab;
             _light.enabled = true;
 
+            var collisions = system.collision;
+            collisions.enabled = true;
+            collisions.sendCollisionMessages = true;
+            collisions.bounce = 0;
+
             // var text = system.textureSheetAnimation;
             // text.enabled = false;
             // text.mode = ParticleSystemAnimationMode.Sprites;
