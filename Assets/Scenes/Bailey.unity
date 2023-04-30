@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659e8cf0dec075942a1706f7b4cd0a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  grid: {fileID: 1946819117}
   playerAction:
     m_Name: Player
     m_Type: 0
@@ -353,8 +353,88 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Player
       m_Flags: 8
+    - m_Name: D-Pad
+      m_Id: 805171a9-4e21-490a-bac0-ea411a76d4cd
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 6d7e5cfa-2476-4dfa-ad16-f3a8d4b14767
+      m_Path: <Gamepad>/dpad/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 82b3e70e-4f5c-4429-ba18-f5844e35d54b
+      m_Path: <Gamepad>/dpad/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 271571ad-e6e4-40eb-92db-bf93727513cf
+      m_Path: <Gamepad>/dpad/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 1892f0e8-b8ce-4772-b3ed-371c8d63c2ab
+      m_Path: <Gamepad>/dpad/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
+    - m_Name: Joystick
+      m_Id: 48da10ab-a833-4d6d-81ce-367830d7cab3
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 4
+    - m_Name: up
+      m_Id: b8f27ecd-b235-4963-b0c6-9961d6bdc41e
+      m_Path: <Gamepad>/leftStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
+    - m_Name: down
+      m_Id: b594c2ed-eec6-428a-8081-19b5ddc7e765
+      m_Path: <Gamepad>/leftStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 3e56a86a-a5f5-4a91-8867-0ca3ca790b84
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
+    - m_Name: right
+      m_Id: e50784ff-8e78-47a5-b231-1eaf89353046
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Player
+      m_Flags: 8
     m_Flags: 0
-  movementDelay: 0.5
+  movementDelay: 0.1
 --- !u!1 &1946819117
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,8 +465,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   square: {fileID: 4277527971621520577, guid: bd87a76106dcf3848874bf7539cbe674, type: 3}
-  width: 21
-  height: 21
+  Width: 21
+  Height: 21
 --- !u!4 &1946819119
 Transform:
   m_ObjectHideFlags: 0
