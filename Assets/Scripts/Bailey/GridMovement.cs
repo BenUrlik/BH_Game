@@ -3,24 +3,26 @@ using UnityEngine.InputSystem;
 public class GridMovement : MonoBehaviour
 {
     public GameObject grid;
-    public InputAction playerAction;
+    public InputAction movement;
+    public InputAction movementConfirm;
     private float movementTimer = 0;
     public float movementDelay = 2;
     Vector2 moveDirection = Vector2.zero;
+    Vector2Int nextMove = Vector2Int.zero;
 
     private void OnEnable()
     {
-        playerAction.Enable();
+        movement.Enable();
     }
     private void OnDisable()
     {
-        playerAction.Disable();
+        movement.Disable();
     }
 
 
     private void Update()
     {
-        moveDirection = playerAction.ReadValue<Vector2>();
+        moveDirection = movement.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
@@ -30,19 +32,26 @@ public class GridMovement : MonoBehaviour
             return;
         if (moveDirection.y < 0)
         {
-            this.transform.Translate(0, -1, 0);
+            nextMove = Vector2Int.up;
         }
         else if (moveDirection.y > 0)
         {
-            this.transform.Translate(0, 1, 0);
+            nextMove = Vector2Int.down;
         }
         else if (moveDirection.x > 0)
         {
-            this.transform.Translate(1, 0, 0);
+            nextMove = Vector2Int.right;
         }
         else if (moveDirection.x < 0)
         {
-            this.transform.Translate(-1, 0, 0);
+            nextMove = Vector2Int.left;
+        }
+        Debug.Log(nextMove);
+
+        if (movementConfirm.triggered)
+        {
+            ExecuteMove(nextMove);
+            Debug.Log(movementConfirm.triggered);
         }
         movementTimer = movementDelay;
     }
@@ -54,5 +63,10 @@ public class GridMovement : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void ExecuteMove(Vector2Int move)
+    {
+        this.transform.Translate(move.x, move.y, 0);
     }
 }
