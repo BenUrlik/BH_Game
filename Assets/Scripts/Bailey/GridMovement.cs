@@ -27,42 +27,66 @@ public class GridMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         movementTimer -= Time.fixedDeltaTime;
+        
         if (movementTimer > 0)
             return;
-        if (moveDirection.y < 0)
-        {
-            nextMove = Vector2Int.up;
-        }
-        else if (moveDirection.y > 0)
-        {
-            nextMove = Vector2Int.down;
-        }
-        else if (moveDirection.x > 0)
-        {
-            nextMove = Vector2Int.right;
-        }
-        else if (moveDirection.x < 0)
-        {
-            nextMove = Vector2Int.left;
-        }
-        Debug.Log(nextMove);
 
-        if (movementConfirm.triggered)
+        if (isValid(nextMove))
         {
-            ExecuteMove(nextMove);
-            Debug.Log(movementConfirm.triggered);
+            if (moveDirection.y < 0)
+            {
+                nextMove = Vector2Int.up;
+            }
+            else if (moveDirection.y > 0)
+            {
+                nextMove = Vector2Int.down;
+            }
+            else if (moveDirection.x > 0)
+            {
+                nextMove = Vector2Int.right;
+            }
+            else if (moveDirection.x < 0)
+            {
+                nextMove = Vector2Int.left;
+            }
+
+
+            if (movementConfirm.triggered)
+            {
+                ExecuteMove(nextMove);
+                //Debug.Log(movementConfirm.triggered);
+            }
         }
+        else
+        {
+            Debug.Log("Not a Valid Move");
+        }
+        
+
         movementTimer = movementDelay;
+
+        Debug.Log("\n" +
+                  "Move Direction:" + moveDirection + "\n" +
+                  "Next Move:" + nextMove + "\n" +
+                  "isValid:" + isValid(nextMove));
     }
 
     public bool isValid(Vector2 direction)
     {
 
         if (grid.transform.Find(direction.x + " " + direction.y))
+        {
+            //Debug.Log("true");
             return true;
+        }
+        
         else
+        {
+            //Debug.Log("False");
             return false;
+        }
     }
 
     public void ExecuteMove(Vector2Int move)
