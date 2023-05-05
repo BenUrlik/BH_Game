@@ -1,32 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using BulletHellSpawning;
 
-public class LazarEnemy : MonoBehaviour
+public class LazarEnemy : BulletHellSpawning
 {
-    public BulletHellSpawning basicEnemy;
-    public string attackPattern = "attackPattern1";
+    public string attackPattern = "attack1";
 
-    void Start()
-    {
-        basicEnemy.SpawnPoint = (attackPattern == "attackPattern1") ? new Vector2(basicEnemy.boundaryX ,basicEnemy.boundaryY) : new Vector2(basicEnemy.boundaryX, basicEnemy.boundaryY);
-        basicEnemy.Spawn(new Vector2(basicEnemy.SpawnPoint.x , basicEnemy.SpawnPoint.y));
+    private void Start() {
+        SpawnPoint = new Vector2(0,0);
+        Spawn(new Vector2(SpawnPoint.x , SpawnPoint.y));
     }
 
-    void FixedUpdate()
-    {
-        switch (attackPattern) {
-            case "attackPattern1" : attackPattern1(); break;
-            case "attackPattern2" : attackPattern2(); break;
-        }
+    private void FixedUpdate() {
+        emit();
+        // switch (attackPattern) {
+        //     case "attack1" : attack1(); break;
+        //     case "attack2" : attack2(); break;
+        // }
     }
 
-    void attackPattern1() {
-        basicEnemy.verticalPingPong(basicEnemy.boundaryY * 2, "down");
-    }
-
-    void attackPattern2() {
-        basicEnemy.verticalPingPong(basicEnemy.boundaryY * 2, "down");
-    }
+    public void attack1() { Debug.Log("attack 1"); }
+    public void attack2() { Debug.Log("attack 2"); }
 }
