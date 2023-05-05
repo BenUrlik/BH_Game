@@ -389,11 +389,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e220f7f9290524bbac78740e72c714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingPos: {x: 0, y: 0}
-  targetPos: {x: 0, y: 0}
+  grid: {fileID: 1946819117}
+  movement:
+    m_Name: Movement
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 408d4afd-3ed7-439d-bc61-05497b18eab7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: WASD
+      m_Id: b0ab3b15-f089-41f8-b6a2-2259ba8a092a
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 5ba1a25c-3645-4434-9d6f-76b9779494f6
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 9c9c4169-8c6d-48c0-aa77-0bcf2dafc6d5
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
+    - m_Name: left
+      m_Id: b21595ae-bc4f-4cbf-b0bf-c34b9337e106
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
+    - m_Name: right
+      m_Id: c0fa4381-2f6b-4885-a612-734c44a4c5d1
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Movement
+      m_Flags: 8
+    m_Flags: 0
+  moveDirection: {x: 0, y: 0}
+  gridPos: {x: 0, y: 0}
   direction: {x: 0, y: 0}
-  travelTime: 100
+  travelTime: 1
   isMoving: 0
+  elapsedTime: 0
+  boardSize: 0
 --- !u!1 &1946819117
 GameObject:
   m_ObjectHideFlags: 0
