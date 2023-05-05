@@ -442,7 +442,7 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   gridPos: {x: 0, y: 0}
   direction: {x: 0, y: 0}
-  travelTime: 1
+  travelTime: 0.2
   isMoving: 0
   elapsedTime: 0
   boardSize: 0
