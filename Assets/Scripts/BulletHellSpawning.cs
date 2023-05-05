@@ -18,32 +18,38 @@ public class BulletHellSpawning : MonoBehaviour
     public Material material;
     public float spin_speed;
     public float time;
-    private float lastEmit;
+    public float lastEmit;
     public Light lightPrefab;
-
-    // Ping Pong Values
-    private float xMin, xMax;
-    public float moveSpeed;
 
     // World Bounds
     public static Vector2 worldBoundary;
     public float boundaryX;
     public float boundaryY;
     public Vector2 SpawnPoint;
+    public float elapsedTime = 0;
+    // public float travelTime = 0;
+    public bool isMoving = false;
 
     private void Awake() {
         worldBoundary = Camera.main.ScreenToWorldPoint( new Vector2( Screen.width, Screen.height ));
         boundaryX = worldBoundary.x;
         boundaryY = worldBoundary.y;
-        moveSpeed = 2.0f;
+    }
+
+    private void Start() {
+        Spawn(new Vector2(SpawnPoint.x , SpawnPoint.y));
     }
 
     private void FixedUpdate() {
-        lastEmit += Time.fixedDeltaTime;
-        if(lastEmit >= firerate) {
-            DoEmit();
-            lastEmit = 0; 
-        }
+        emit();
+        // lastEmit += Time.fixedDeltaTime;
+        // if(lastEmit >= firerate) {
+        //     DoEmit();
+        //     lastEmit = 0; 
+        // }
+
+        // if(!isMoving && this.transform.position.x != 5)
+        //     StartCoroutine(move(new Vector2Int(5, 5), 10.0f));
     }
 
     public void Spawn(Vector2 startPoint){
@@ -114,6 +120,33 @@ public class BulletHellSpawning : MonoBehaviour
 
             system.Play();
         }
+    }
+
+    public void emit() {
+        Debug.Log("Emiting");
+        lastEmit += Time.fixedDeltaTime;
+        if(lastEmit >= firerate) {
+            DoEmit();
+            lastEmit = 0; 
+        }
+    }
+
+    public IEnumerator move(Vector2Int direction, float travelTime)
+    {
+        elapsedTime = 0;
+        Vector2 startingPos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 targetPos = new Vector2(transform.position.x, transform.position.y) + direction;
+        isMoving = true;
+
+        while(elapsedTime < travelTime) {
+            transform.position = Vector2.Lerp(startingPos, targetPos, elapsedTime / travelTime);
+            elapsedTime +=  Time.deltaTime;
+            yield return null;
+        }
+        
+        transform.position = targetPos;
+
+        isMoving = false;
     }
 
     public void horizontalPingPong(float length, string direction) {
