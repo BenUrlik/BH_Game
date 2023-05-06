@@ -53,10 +53,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMovement();
-        if (!isMoving)
-            Time.timeScale = 0.3f;
-        else
-            Time.timeScale = 1;
+       // if (!isMoving)
+       //     Time.timeScale = 0.3f;
+       // else
+       //     Time.timeScale = 1;
 
 
     }

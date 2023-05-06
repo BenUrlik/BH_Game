@@ -43,14 +43,15 @@ public class BulletHellSpawning : MonoBehaviour
     private void FixedUpdate() {
         //horizontalPingPong(5, "right");
         emit();
-        
+        //rotationalMovement();
+
         //lastEmit += Time.fixedDeltaTime;
         //if(lastEmit >= firerate) {
         //    DoEmit();
         //    lastEmit = 0; 
         // }
 
-         if(!isMoving && this.transform.position.x != 5)
+        if (!isMoving && this.transform.position.x != 5)
              StartCoroutine(move(new Vector2Int(5, 5), 10.0f));
     }
 
@@ -72,7 +73,7 @@ public class BulletHellSpawning : MonoBehaviour
             
             system = go.AddComponent<ParticleSystem>();
             go.GetComponent<ParticleSystemRenderer>().material = particleMaterial;
-            
+
             var mainModule = system.main;
             mainModule.startColor = color;
             mainModule.startSize = size;
@@ -102,7 +103,7 @@ public class BulletHellSpawning : MonoBehaviour
             collisions.type = ParticleSystemCollisionType.World;
             collisions.mode = ParticleSystemCollisionMode.Collision2D; 
             collisions.bounce = 0;
-            collisions.lifetimeLoss = 1;
+            collisions.lifetimeLoss = 0;
             collisions.sendCollisionMessages = true;
             
             var text = system.textureSheetAnimation;
@@ -165,6 +166,13 @@ public class BulletHellSpawning : MonoBehaviour
         Vector3 pos = transform.position;
         pos.y = (direction == "up") ? Mathf.PingPong(Time.time, length) + SpawnPoint.y : - (Mathf.PingPong(Time.time, length) - SpawnPoint.y);
         transform.position = pos;
+    }
+
+    void OnParticleCollision(GameObject other)
+    {
+
+        Debug.Log(other);
+
     }
 
     public void rotationalMovement() { transform.rotation = Quaternion.Euler(0, 0, Time.time * spin_speed); }

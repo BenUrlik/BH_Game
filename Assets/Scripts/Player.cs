@@ -21,10 +21,12 @@ public class Player : MonoBehaviour
     {
         // Debug.Log("Player has been hit!");
         // Debug.Log(playerHealth--);
+        Debug.Log(other);
         currentPlayerHealth--;
         if(currentPlayerHealth == 0) { 
             Destroy(player.GetComponent<SpriteRenderer>()); 
             Destroy(player.GetComponent<CircleCollider2D>());
         }
+        
     }
 }
