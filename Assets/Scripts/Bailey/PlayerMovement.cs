@@ -46,14 +46,19 @@ public class PlayerMovement : MonoBehaviour
     {
         moveDirection = movement.ReadValue<Vector2>();
         Debug.Log(moveDirection);
+
+        
     }
 
     private void FixedUpdate()
     {
         HandleMovement();
+        if (!isMoving)
+            Time.timeScale = 0.3f;
+        else
+            Time.timeScale = 1;
 
 
-       
     }
 
     public IEnumerator movePlayer(Vector2Int targetPos)
