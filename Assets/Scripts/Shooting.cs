@@ -13,6 +13,9 @@ public class Shooting : MonoBehaviour
     public InputAction shoot;
     public float shootInputValue;
 
+    public float rotZ;
+    public Vector2 direction;
+
     //Basic Attack Stats
     public GameObject bullet;
     public Rigidbody2D bulletRB;
@@ -48,6 +51,15 @@ public class Shooting : MonoBehaviour
     {
         mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         shootInputValue = shoot.ReadValue<float>();
+
+        direction = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+
+        rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0,0,rotZ);
+
+        Debug.Log(mousePos);
+        Debug.Log(direction);
     }
 
     private void FixedUpdate()
@@ -62,7 +74,7 @@ public class Shooting : MonoBehaviour
     {
         var dir = new Vector2(0, 0);
         var myNewBulletRB = (Rigidbody2D)Instantiate(bulletRB, transform.position, transform.rotation);
-        //myNewBulletRB.velocity  = 
+        myNewBulletRB.velocity = direction * bulletSpeed;
 
 
 
