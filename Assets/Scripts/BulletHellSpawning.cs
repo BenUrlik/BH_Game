@@ -41,15 +41,17 @@ public class BulletHellSpawning : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        //horizontalPingPong(5, "right");
         emit();
-        // lastEmit += Time.fixedDeltaTime;
-        // if(lastEmit >= firerate) {
-        //     DoEmit();
-        //     lastEmit = 0; 
+        
+        //lastEmit += Time.fixedDeltaTime;
+        //if(lastEmit >= firerate) {
+        //    DoEmit();
+        //    lastEmit = 0; 
         // }
 
-        // if(!isMoving && this.transform.position.x != 5)
-        //     StartCoroutine(move(new Vector2Int(5, 5), 10.0f));
+         if(!isMoving && this.transform.position.x != 5)
+             StartCoroutine(move(new Vector2Int(5, 5), 10.0f));
     }
 
     public void Spawn(Vector2 startPoint){
@@ -64,7 +66,7 @@ public class BulletHellSpawning : MonoBehaviour
             //  Instantiation of the Particle System Object
             var go = new GameObject("Particle System");
             if(number_of_columns == 1 )  go.transform.Rotate(angle, 90, 0); // Rotates so the system emits upwards
-            else go.transform.Rotate(angle * (i + 1), 90, 0);
+            else go.transform.Rotate(angle * i, 90, 0);
             go.transform.parent = this.transform;
             go.transform.position = this.transform.position;
             
@@ -77,8 +79,11 @@ public class BulletHellSpawning : MonoBehaviour
             mainModule.startSpeed = speed;
             mainModule.maxParticles = 1000;
             mainModule.simulationSpace = ParticleSystemSimulationSpace.World;
-            mainModule.startRotation = ((angle * (i + 1))-90) * Mathf.Deg2Rad; 
 
+            if(number_of_columns == 1)
+                mainModule.startRotation = ((angle) + 90) * Mathf.Deg2Rad;
+            else
+                mainModule.startRotation = ((angle * i) + 90) * Mathf.Deg2Rad;
 
             var emission = system.emission;
             emission.enabled = false;
@@ -100,10 +105,10 @@ public class BulletHellSpawning : MonoBehaviour
             collisions.lifetimeLoss = 1;
             collisions.sendCollisionMessages = true;
             
-            // var text = system.textureSheetAnimation;
-            // text.enabled = false;
-            // text.mode = ParticleSystemAnimationMode.Sprites;
-            // text.AddSprite(texture);
+            var text = system.textureSheetAnimation;
+            text.enabled = true;
+            text.mode = ParticleSystemAnimationMode.Sprites;
+            text.AddSprite(texture);
         }
 
         
