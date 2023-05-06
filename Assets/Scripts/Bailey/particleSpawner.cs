@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class particleSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
+    [Header("Projectile Settings")]
+    public int numberOfProjectiles;
+    public float projectSpeed;
+    public GameObject projectilePrefab;
+
 }

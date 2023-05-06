@@ -64,7 +64,7 @@ public class BulletHellSpawning : MonoBehaviour
             //  Instantiation of the Particle System Object
             var go = new GameObject("Particle System");
             if(number_of_columns == 1 )  go.transform.Rotate(0, angle, 0); // Rotates so the system emits upwards
-            else go.transform.Rotate(angle * i, 90, 0);
+            else go.transform.Rotate(angle * (i + 1), 90, 0);
             go.transform.parent = this.transform;
             go.transform.position = this.transform.position;
             
@@ -77,6 +77,7 @@ public class BulletHellSpawning : MonoBehaviour
             mainModule.startSpeed = speed;
             mainModule.maxParticles = 1000;
             mainModule.simulationSpace = ParticleSystemSimulationSpace.World;
+            mainModule.startRotation = angle * i; 
 
 
             var emission = system.emission;
