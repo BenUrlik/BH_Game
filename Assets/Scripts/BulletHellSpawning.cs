@@ -43,12 +43,13 @@ public class BulletHellSpawning : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        //horizontalPingPong(5, "right");
+       
         emit();
+        horizontalPingPong(5, "left");
         //rotationalMovement();
 
-        if (!isMoving && this.transform.position.x != 5)
-             StartCoroutine(move(new Vector2Int(5, 5), 10.0f));
+        // if (!isMoving && this.transform.position.x != 5)
+        //      StartCoroutine(move(new Vector2Int(5, 5), 10.0f));
     }
 
     public void Spawn(Vector2 startPoint){

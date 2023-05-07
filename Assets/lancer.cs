@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LancerEnemy : BulletHellSpawning
+public class lancer : MonoBehaviour
 {
     public string attackPattern = "attack1";
+    public int enemyHealth = 5;
 
     private void Start() {
-        SpawnPoint = new Vector2(0,0);
-        Spawn(new Vector2(SpawnPoint.x , SpawnPoint.y));
-        Debug.Log(system);
-        this.system = system;
+        
     }
 
     private void FixedUpdate() {
@@ -21,6 +19,6 @@ public class LancerEnemy : BulletHellSpawning
         }
     }
 
-    public void attack1() { /* verticalPingPong(5, "right"); */ }
-    public void attack2() { Debug.Log("attack 2"); }
+    public void attack1() { verticalPingPong(5, "right");  }
+    public void attack2() { horizontalPingPong(5, "down"); }
 }
