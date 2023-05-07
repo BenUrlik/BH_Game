@@ -45,9 +45,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         moveDirection = movement.ReadValue<Vector2>();
-        Debug.Log(moveDirection);
-
-        
     }
 
     private void FixedUpdate()
@@ -85,8 +82,6 @@ public class PlayerMovement : MonoBehaviour
 
     public bool IsValid(Vector2Int gridPos)
     {
-        Debug.Log(gridArray.GetLength(0));
-        Debug.Log(gridArray.GetLength(1));
         return !(gridPos.x >= gridArray.GetLength(0) 
                  || gridPos.y >= gridArray.GetLength(1) 
                  || gridPos.x < 0 

@@ -103,8 +103,9 @@ public class BulletHellSpawning : MonoBehaviour
             collisions.type = ParticleSystemCollisionType.World;
             collisions.mode = ParticleSystemCollisionMode.Collision2D; 
             collisions.bounce = 0;
-            collisions.lifetimeLoss = 0;
+            collisions.lifetimeLoss = 1;
             collisions.sendCollisionMessages = true;
+            collisions.collidesWith = LayerMask.GetMask("Player");
             
             var text = system.textureSheetAnimation;
             text.enabled = true;
@@ -130,7 +131,6 @@ public class BulletHellSpawning : MonoBehaviour
     }
 
     public void emit() {
-        Debug.Log("Emiting");
         lastEmit += Time.fixedDeltaTime;
         if(lastEmit >= firerate) {
             DoEmit();
@@ -170,8 +170,6 @@ public class BulletHellSpawning : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-
-        Debug.Log(other);
 
     }
 
