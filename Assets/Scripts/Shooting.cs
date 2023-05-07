@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Shooting : MonoBehaviour
 { 
     public ParticleSystem system;
+    private Vector3 mousePos;
 
 // Particle System Configurations
 public int number_of_columns;
@@ -44,18 +45,12 @@ private void Start()
 }
     private void Update()
 {
-    for(int i = 0; i < number_of_columns; ++i)
-        {
-
-        }
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 }
 
     private void FixedUpdate()
 {
-    //horizontalPingPong(5, "right");
     emit();
-    //rotationalMovement();
-
 }
 
 public void Spawn(Vector2 startPoint)
@@ -70,7 +65,7 @@ public void Spawn(Vector2 startPoint)
     for (int i = 0; i < number_of_columns; ++i)
     {
         //  Instantiation of the Particle System Object
-        var go = new GameObject("Particle System");
+        var go = new GameObject("Particle System" + i);
         if (number_of_columns == 1) go.transform.Rotate(angle, 90, 0); // Rotates so the system emits upwards
         else go.transform.Rotate(angle * i, 90, 0);
         go.transform.parent = this.transform;
@@ -131,9 +126,14 @@ public void DoEmit()
         emitParams.startColor = color;
         emitParams.startSize = size;
         emitParams.startLifetime = lifetime;
-        system.Emit(emitParams, 1);
 
-        system.Play();
+        var mainModule = system.main;
+            mainModule.startRotation = Mathf.Atan2(mousePos.x,mousePos.y);
+            Debug.Log(Mathf.Atan2(mousePos.x, mousePos.y) * (180.0*Mathf.PI));
+
+        system.transform.LookAt(mousePos);
+        
+        system.Emit(emitParams, 1);
     }
 }
 
@@ -186,11 +186,6 @@ void OnParticleCollision(GameObject other)
 }
 
 public void rotationalMovement() { transform.rotation = Quaternion.Euler(0, 0, Time.time * spin_speed); }
-   // private Vector2 GetWorldMousePos()
-    //{
-        //Vector2 mousePos = _inputs.UI.Point.ReadValue<Vector2>();
-        //return Camera.main.ScreenToWorldPoint(mousePos);
-    //}
 
 }
 
