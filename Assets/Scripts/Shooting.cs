@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Shooting : MonoBehaviour
 { 
     public ParticleSystem system;
-    private Vector3 mousePos;
+    private Vector2 mousePos;
 
 // Particle System Configurations
 public int number_of_columns;
@@ -117,9 +117,14 @@ public void Spawn(Vector2 startPoint)
 }
 
 public void DoEmit()
-{
-    foreach (Transform child in transform)
+{       
+        int i = 0;
+        int middleIndex = number_of_columns / 2;
+
+
+        foreach (Transform child in transform)
     {
+            
         system = child.GetComponent<ParticleSystem>();
 
         var emitParams = new ParticleSystem.EmitParams();
@@ -128,12 +133,19 @@ public void DoEmit()
         emitParams.startLifetime = lifetime;
 
         var mainModule = system.main;
-            mainModule.startRotation = Mathf.Atan2(mousePos.x,mousePos.y);
-            Debug.Log(Mathf.Atan2(mousePos.x, mousePos.y) * (180.0*Mathf.PI));
+            
+           //Debug.Log(Mathf.Atan2(mousePos.x, mousePos.y));
 
-        system.transform.LookAt(mousePos);
-        
-        system.Emit(emitParams, 1);
+            system.transform.LookAt(mousePos);
+            system.transform.Rotate((i - middleIndex) * angle, 0,0);
+
+            if(child.transform.rotation.y > 0)
+                mainModule.startRotation = Mathf.Atan2(mousePos.x - transform.position.x, mousePos.y - transform.position.y) + ((i - middleIndex) * angle) * Mathf.Deg2Rad;
+            else
+                mainModule.startRotation = Mathf.Atan2(mousePos.x - transform.position.x, mousePos.y - transform.position.y) - ((i - middleIndex) * angle) * Mathf.Deg2Rad;
+
+            system.Emit(emitParams, 1);
+            i++;
     }
 }
 
