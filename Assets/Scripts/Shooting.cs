@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Shooting : MonoBehaviour
 { 
     public ParticleSystem system;
-    private Vector2 mousePos;
+    private Vector3 mousePos;
 
 // Particle System Configurations
 public int number_of_columns;
@@ -45,20 +45,12 @@ private void Start()
 }
     private void Update()
 {
-        mousePos = Input.mousePosition;
-
-    for(int i = 0; i < number_of_columns; ++i)
-        {
-            //this.getCh
-        }
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 }
 
     private void FixedUpdate()
 {
-    //horizontalPingPong(5, "right");
     emit();
-    //rotationalMovement();
-
 }
 
 public void Spawn(Vector2 startPoint)
@@ -134,9 +126,14 @@ public void DoEmit()
         emitParams.startColor = color;
         emitParams.startSize = size;
         emitParams.startLifetime = lifetime;
-        system.Emit(emitParams, 1);
 
-        system.Play();
+        var mainModule = system.main;
+            mainModule.startRotation = Mathf.Atan2(mousePos.x,mousePos.y);
+            Debug.Log(Mathf.Atan2(mousePos.x, mousePos.y) * (180.0*Mathf.PI));
+
+        system.transform.LookAt(mousePos);
+        
+        system.Emit(emitParams, 1);
     }
 }
 
