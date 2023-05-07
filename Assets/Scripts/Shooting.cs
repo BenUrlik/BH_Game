@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Shooting : MonoBehaviour
 { 
     public ParticleSystem system;
+    private Vector2 mousePos;
 
 // Particle System Configurations
 public int number_of_columns;
@@ -44,9 +45,11 @@ private void Start()
 }
     private void Update()
 {
+        mousePos = Input.mousePosition;
+
     for(int i = 0; i < number_of_columns; ++i)
         {
-
+            //this.getCh
         }
 }
 
@@ -70,7 +73,7 @@ public void Spawn(Vector2 startPoint)
     for (int i = 0; i < number_of_columns; ++i)
     {
         //  Instantiation of the Particle System Object
-        var go = new GameObject("Particle System");
+        var go = new GameObject("Particle System" + i);
         if (number_of_columns == 1) go.transform.Rotate(angle, 90, 0); // Rotates so the system emits upwards
         else go.transform.Rotate(angle * i, 90, 0);
         go.transform.parent = this.transform;
@@ -186,11 +189,6 @@ void OnParticleCollision(GameObject other)
 }
 
 public void rotationalMovement() { transform.rotation = Quaternion.Euler(0, 0, Time.time * spin_speed); }
-   // private Vector2 GetWorldMousePos()
-    //{
-        //Vector2 mousePos = _inputs.UI.Point.ReadValue<Vector2>();
-        //return Camera.main.ScreenToWorldPoint(mousePos);
-    //}
 
 }
 
