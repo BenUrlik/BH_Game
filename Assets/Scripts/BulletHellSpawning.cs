@@ -27,8 +27,10 @@ public class BulletHellSpawning : MonoBehaviour
     public float boundaryY;
     public Vector2 SpawnPoint;
     public float elapsedTime = 0;
-    // public float travelTime = 0;
     public bool isMoving = false;
+
+    // Enemy Stats
+    public int enemyHealth = 5;
 
     private void Awake() {
         worldBoundary = Camera.main.ScreenToWorldPoint( new Vector2( Screen.width, Screen.height ));
@@ -45,20 +47,11 @@ public class BulletHellSpawning : MonoBehaviour
         emit();
         //rotationalMovement();
 
-        //lastEmit += Time.fixedDeltaTime;
-        //if(lastEmit >= firerate) {
-        //    DoEmit();
-        //    lastEmit = 0; 
-        // }
-
         if (!isMoving && this.transform.position.x != 5)
              StartCoroutine(move(new Vector2Int(5, 5), 10.0f));
     }
 
     public void Spawn(Vector2 startPoint){
-        // Spread of each particle emitter
-        // angle = 360 / number_of_columns;
-        
         // Simple particle material
         Material particleMaterial = material;
         transform.position = new Vector3(startPoint.x, startPoint.y, 0);
@@ -170,7 +163,7 @@ public class BulletHellSpawning : MonoBehaviour
 
     void OnParticleCollision(GameObject other)
     {
-
+        if(other.name == "playerParticleSystem") { enemyHealth--; }
     }
 
     public void rotationalMovement() { transform.rotation = Quaternion.Euler(0, 0, Time.time * spin_speed); }
