@@ -12,13 +12,13 @@ public class lancer : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        emit();
+       
         switch (attackPattern) {
             case "attack1" : attack1(); break;
             case "attack2" : attack2(); break;
         }
     }
 
-    public void attack1() { verticalPingPong(5, "right");  }
-    public void attack2() { horizontalPingPong(5, "down"); }
+    public void attack1() {   }
+    public void attack2() {  }
 }
