@@ -884,6 +884,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPlayerHealth: 10
   currentPlayerHealth: 10
+  invulnFlashDelay: 0.1
+  invulnTime: 1
   player: {fileID: 1596686428}
   slider: {fileID: 103107826}
 --- !u!58 &1596686434
@@ -920,7 +922,7 @@ MonoBehaviour:
   texture: {fileID: 21300000, guid: cc6ee0cc2041d8e41a2ec1810a30df2f, type: 3}
   color: {r: 1, g: 1, b: 1, a: 1}
   lifetime: 3
-  firerate: 0.15
+  firerate: 0.8
   size: 0.4
   angle: 10
   material: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}

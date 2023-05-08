@@ -192,10 +192,10 @@ public void verticalPingPong(float length, string direction)
     transform.position = pos;
 }
 
-void OnParticleCollision(GameObject other)
-{
-
-}
+public void OnClick()
+    {
+        
+    }
 
 public void rotationalMovement() { transform.rotation = Quaternion.Euler(0, 0, Time.time * spin_speed); }
 
